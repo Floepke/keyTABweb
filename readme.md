@@ -10,7 +10,7 @@ Vector-based PDF drawing utility scaffold using SVG + jsPDF + svg2pdf.js.
   - `new_rect(x1, y1, x2, y2, cap, joint, stroke, fill, dash)`
   - `new_polygon(points, cap, joint, stroke, fill, dash)`
   - `poly_line(points, cap, joint, stroke, dash)`
-  - `new_oval(x1, y1, x2, y2, stroke, fill, dash)`
+  - `new_oval(x1, y1, x2, y2, stroke, fill, dash, v_tilt, h_tilt)`
   - `save(filename)`
 - `example.html`: Multi-page example using all drawing methods and the required CDN dependencies.
 

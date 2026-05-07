@@ -48,6 +48,25 @@ class VectorPDF {
     el.setAttribute("fill", fill === null ? "none" : fill);
   }
 
+  _sheared_oval_points(x1, y1, x2, y2, v_tilt, h_tilt, segments = 64) {
+    const cx = (x1 + x2) / 2;
+    const cy = (y1 + y2) / 2;
+    const rx = Math.abs(x2 - x1) / 2;
+    const ry = Math.abs(y2 - y1) / 2;
+    const points = [];
+
+    for (let i = 0; i < segments; i += 1) {
+      const t = (i / segments) * Math.PI * 2;
+      const ex = cx + rx * Math.cos(t);
+      const ey = cy + ry * Math.sin(t);
+      const sx = ex + h_tilt * (ey - cy);
+      const sy = ey + v_tilt * (ex - cx);
+      points.push([sx, sy]);
+    }
+
+    return points;
+  }
+
   new_line(x1, y1, x2, y2, cap = "butt", joint = "miter", stroke = "#000000", dash = null) {
     const svg = this._require_page();
     const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
@@ -89,8 +108,18 @@ class VectorPDF {
     svg.appendChild(polyline);
   }
 
-  new_oval(x1, y1, x2, y2, stroke = "#000000", fill = null, dash = null) {
+  new_oval(x1, y1, x2, y2, stroke = "#000000", fill = null, dash = null, v_tilt = 0, h_tilt = 0) {
     const svg = this._require_page();
+    if (v_tilt !== 0 || h_tilt !== 0) {
+      const oval_poly = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+      const points = this._sheared_oval_points(x1, y1, x2, y2, v_tilt, h_tilt);
+      oval_poly.setAttribute("points", points.map(([x, y]) => `${x},${y}`).join(" "));
+      this._set_stroke(oval_poly, stroke, "butt", "round", dash);
+      this._set_fill(oval_poly, fill);
+      svg.appendChild(oval_poly);
+      return;
+    }
+
     const oval = document.createElementNS("http://www.w3.org/2000/svg", "ellipse");
     oval.setAttribute("cx", (x1 + x2) / 2);
     oval.setAttribute("cy", (y1 + y2) / 2);

@@ -24,14 +24,14 @@
         doc.new_rect(10, 20, 80, 60, "square", "bevel", "#0000ff", "#dce6ff", [4, 2]);
         doc.new_polygon([[90, 20], [130, 20], [150, 50], [100, 70]], "round", "miter", "#008000", "#e7ffe7", null);
         doc.poly_line([[10, 80], [30, 110], [60, 90], [90, 120], [120, 95]], "round", "round", "#111111", [3, 2]);
-        doc.new_oval(130, 80, 190, 130, "#aa00aa", "#ffe6ff", [1.5, 1.5]);
+        doc.new_oval(130, 80, 190, 130, "#aa00aa", "#ffe6ff", [1.5, 1.5], 0.3, 0);
 
         doc.new_page(148, 210);
         doc.new_line(10, 10, 130, 180, "butt", "miter", "#333333", null);
         doc.new_rect(20, 20, 120, 80, "butt", "miter", "#f57c00", null, [5, 3]);
         doc.new_polygon([[20, 110], [70, 90], [120, 120], [90, 170], [40, 160]], "round", "round", "#0277bd", "#e1f5fe", [2, 1]);
         doc.poly_line([[20, 190], [40, 180], [60, 195], [80, 175], [120, 190]], "round", "bevel", "#2e7d32", null);
-        doc.new_oval(30, 130, 70, 170, "#6a1b9a", null, null);
+        doc.new_oval(30, 130, 70, 170, "#6a1b9a", null, null, 0, -0.2);
 
         return doc;
       };
