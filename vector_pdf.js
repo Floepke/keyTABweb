@@ -99,7 +99,7 @@ class VectorPDF {
     svg.appendChild(polygon);
   }
 
-  poly_line(points, cap = "butt", joint = "miter", stroke = "#000000", dash = null) {
+  new_polyline(points, cap = "butt", joint = "miter", stroke = "#000000", dash = null) {
     const svg = this._require_page();
     const polyline = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
     polyline.setAttribute("points", points.map(([x, y]) => `${x},${y}`).join(" "));
