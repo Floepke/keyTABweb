@@ -59,8 +59,8 @@ class VectorPDF {
       const t = (i / segments) * Math.PI * 2;
       const ex = cx + rx * Math.cos(t);
       const ey = cy + ry * Math.sin(t);
+      const sx = ex + h_tilt * (ey - cy);
       const sy = ey + v_tilt * (ex - cx);
-      const sx = ex + h_tilt * (sy - cy);
       points.push([sx, sy]);
     }
 
